@@ -9,14 +9,14 @@ import RequireAuth from './components/HOC/RequireAuth';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import {
-  BrowserRouter as Router,
-  Route,
-} from 'react-router-dom';
+import logger from 'redux-logger';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import reducers from './reducers';
 import './index.css';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk, logger)(
+  createStore,
+);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
@@ -30,5 +30,5 @@ ReactDOM.render(
       </div>
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

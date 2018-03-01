@@ -59,6 +59,7 @@ export const logout = () => {
     axios
       .post(`${ROOT_URL}/logout`)
       .then(() => {
+        console.log('unauth');
         dispatch({
           type: USER_UNAUTHENTICATED,
         });
