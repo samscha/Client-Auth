@@ -72,6 +72,9 @@ export const getUsers = () => {
       })
       .then(response => {
         dispatch({
+          type: USER_AUTHENTICATED,
+        });
+        dispatch({
           type: GET_USERS,
           payload: response.data,
         });
