@@ -48,10 +48,9 @@ export const login = (username, password, history) => {
       .post(`${ROOT_URL}/login`, { username, password })
       .then(({ data }) => {
         localStorage.setItem(appKey, data.token);
-        // dispatch({ type: ADD_TOKEN, payload: data.token });
-        // dispatch({
-        //   type: USER_AUTHENTICATED,
-        // });
+        dispatch({
+          type: USER_AUTHENTICATED,
+        });
         history.push('/users');
       })
       .catch(() => {
@@ -59,39 +58,10 @@ export const login = (username, password, history) => {
       });
   };
 };
-// export const login = (username, password, history) => {
-//   return dispatch => {
-//     axios
-//       .post(`${ROOT_URL}/login`, { username, password })
-//       .then(() => {
-//         dispatch({
-//           type: USER_AUTHENTICATED,
-//         });
-//         history.push('/users');
-//       })
-//       .catch(() => {
-//         dispatch(authError('Incorrect username/password combo'));
-//       });
-//   };
-// };
 
 export const logout = () => {
   localStorage.removeItem(appKey);
-  return { type: USER_UNAUTHENTICATED }; // this is just to not break redux-logger
-  // return { type: REVOKE_TOKEN };
-  // return dispatch => {
-  // axios
-  // .post(`${ROOT_URL}/logout`)
-  // .then(() => {
-  // dispatch({ type: REVOKE_TOKEN });
-  // dispatch({
-  //   type: USER_UNAUTHENTICATED,
-  // });
-  // })
-  // .catch(() => {
-  // dispatch(authError('Failed to log you out'));
-  // });
-  // };
+  return { type: USER_UNAUTHENTICATED };
 };
 
 export const getUsers = () => {
@@ -111,18 +81,3 @@ export const getUsers = () => {
       });
   };
 };
-// export const getUsers = () => {
-//   return dispatch => {
-//     axios
-//       .get(`${ROOT_URL}/restricted/users`)
-//       .then(response => {
-//         dispatch({
-//           type: GET_USERS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch(() => {
-//         dispatch(authError('Failed to fetch users'));
-//       });
-//   };
-// };
