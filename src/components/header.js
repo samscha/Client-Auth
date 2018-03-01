@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { appKey } from '../config';
 
 class Header extends Component {
   getLinks() {
-    if (this.props.authenticated) {
+    if (localStorage.getItem(appKey)) {
       return (
         <li>
           <Link to="/signout">Sign Out</Link>
@@ -17,7 +18,7 @@ class Header extends Component {
       </li>,
       <li key={2}>
         <Link to="/signup">Sign Up</Link>
-      </li>
+      </li>,
     ];
   }
 
@@ -33,7 +34,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    authenticated: state.auth.authenticated
+    // authenticated: state.auth.authenticated,
   };
 };
 
